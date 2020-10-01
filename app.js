@@ -30,6 +30,24 @@ datosCovid( "argentina" ,confirmados => {
     console.log('Fecha: ' + casosConfirmadosHoy.Date);
 });
 
+/* ********************************************************************** */
+/* ********************************************************************** */
+/*              OTRA FORMA DE HACER LA PETICION USANDO PROMESAS           */
+/* ********************************************************************** */
+/* ********************************************************************** */
+
+/* const rp = require('request-promise')
+url = 'https://api.covid19api.com/total/dayone/country/argentina/status/confirmed'
+
+rp(url).then( response => JSON.parse(response)).then(confirmados => {
+
+    let casosConfirmadosHoy = confirmados[confirmados.length -1];
+    console.log('Pais:' + casosConfirmadosHoy.Country);
+    console.log('Total de casos confirmados: ' + casosConfirmadosHoy.Cases);
+    console.log('Fecha: ' + casosConfirmadosHoy.Date);
+
+}).catch( error => console.log(error)) */
+
 
 
 /* ********************************************************************** */
@@ -70,3 +88,4 @@ request(url, function(error, response, body1){
     });
 
 }) */
+
