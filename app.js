@@ -1,27 +1,9 @@
 const https = require("https");
 
-/* ************************************************ */
-/*                      OPCION 1                    */
-/* ************************************************ */
-// function datosCovid(pais, callback) {
+function datosCovid(pais, callback) {
 
-/* ************************************************ */
-/*                      OPCION 2                    */
-/* ************************************************ */
-function datosCovid( callback ) {
-
-    /* ************************************************ */
-    /*                      OPCION 1                    */
-    /* ************************************************ */
     // Casos confirmados por pais
-    // var url = "https://api.covid19api.com/total/dayone/country/" + pais + "/status/confirmed";
-
-
-    /* ************************************************ */
-    /*                      OPCION 2                    */
-    /* ************************************************ */
-    // Un resumen de la situacion por país actualizado diariamente.
-    var url = "https://api.covid19api.com/summary";
+    var url = "https://api.covid19api.com/total/dayone/country/" + pais + "/status/confirmed";
 
     https.get(url, (resp) => {
 
@@ -41,33 +23,41 @@ function datosCovid( callback ) {
 
 }
 
-/* ************************************************ */
-/*                      OPCION 1                    */
-/* ************************************************ */
-/* datosCovid( "argentina" ,confirmados => {
+datosCovid( "argentina" ,confirmados => {
     let casosConfirmadosHoy = confirmados[confirmados.length -1];
     console.log('Pais:' + casosConfirmadosHoy.Country);
     console.log('Total de casos confirmados: ' + casosConfirmadosHoy.Cases);
     console.log('Fecha: ' + casosConfirmadosHoy.Date);
-}); */
+});
 
 
-/* ************************************************ */
-/*                      OPCION 2                    */
-/* ************************************************ */
-datosCovid( datos => {
 
+/* ********************************************************************** */
+/* ********************************************************************** */
+/*          OTRA FORMA DE HACER LA PETICION Y OTRO RECUSO DE LA API       */
+/* ********************************************************************** */
+/* ********************************************************************** */
+
+
+/* const request = require('request')
+
+// Este recurso devuelve los datos a nivel mundial y de cada pais
+let url = 'https://api.covid19api.com/summary' 
+
+request(url, function(error, response, body1){
+
+    let body = JSON.parse(body1)
     console.log("\t~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     console.log("\t Situación a nivel Mundial ")
     console.log("\t~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    console.log("\tCantidad de Confirmados: " + datos.Global.NewConfirmed)
-    console.log("\tTotal de Confirmados: " + datos.Global.TotalConfirmed)
-    console.log("\tCantidad de muertos: " + datos.Global.NewDeaths)
-    console.log("\tTotal de muertos: " + datos.Global.TotalDeaths)
-    console.log("\tCantidad de recuperados: " + datos.Global.NewRecovered)
-    console.log("\tTotal de recuperados: " + datos.Global.TotalRecovered + "\n\n")
+    console.log("\tCantidad de Confirmados: " + body.Global.NewConfirmed)
+    console.log("\tTotal de Confirmados: " + body.Global.TotalConfirmed)
+    console.log("\tCantidad de muertos: " + body.Global.NewDeaths)
+    console.log("\tTotal de muertos: " + body.Global.TotalDeaths)
+    console.log("\tCantidad de recuperados: " + body.Global.NewRecovered)
+    console.log("\tTotal de recuperados: " + body.Global.TotalRecovered + "\n\n")
 
-    let paises = datos.Countries;
+    let paises = body.Countries;
 
     paises.forEach( pais => {
         console.log("~~~~~~~~ " + pais.Country + " ~~~~~~~~")
@@ -78,5 +68,5 @@ datosCovid( datos => {
         console.log("Cantidad de recuperados: " + pais.NewRecovered)
         console.log("Total de recuperados: " + pais.TotalRecovered + "\n")    
     });
-    
-});
+
+}) */
